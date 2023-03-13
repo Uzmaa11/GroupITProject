@@ -123,7 +123,7 @@ def delete_blog(request, blogs_id):
  
 def blog_search(request):
     query = request.GET.get('q')
-    order_by = request.GET.get('order_by', '-rating')  # 默认按降序排列
+    order_by = request.GET.get('order_by', '-rating')  # The default is in descending order
     if order_by == 'rating':
         results = Blogs.objects.filter(title__icontains=query).order_by('rating')
     else:
