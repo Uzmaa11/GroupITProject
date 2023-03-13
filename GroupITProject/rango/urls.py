@@ -16,7 +16,7 @@ path('admin/',views.admin, name='admin'),
 
 ]
 
-from django.urls import path
+
 from .views import admin_login, dashboard, new_post
 
 urlpatterns = [
@@ -27,3 +27,16 @@ urlpatterns = [
     path('blogs/', views.blog_list, name='blogs'),
 ]
 
+
+from .views import delete_blog
+
+urlpatterns = [
+    path('blog/<int:blog_id>/delete/', delete_blog, name='delete_blog'),
+]
+
+
+from . import views
+
+urlpatterns = [
+    path('blog/search/', views.blog_search, name='blog_search'),
+]
