@@ -73,44 +73,44 @@ class BlogCreateView(View):
 #        form.instance.user_id = self.request.user_id
 #        return super().form_valid(form)
 
-# from django.shortcuts import render, redirect
-# from django.contrib.auth import authenticate, login
-# from django.contrib.auth.decorators import login_required
-# from .models import Post
-# from .models import PostForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from .models import Post
+from .models import PostForm
 
-# # Administrator Login View Functions
-# def admin_login(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         password = request.POST['password']
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('dashboard')
-#         else:
-#             error = 'Invalid username or password'
-#     else:
-#         error = ''
-#     return render(request, 'admin/login.html', {'error': error})
+# Administrator Login View Functions
+def admin_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            error = 'Invalid username or password'
+    else:
+        error = ''
+    return render(request, 'admin/login.html', {'error': error})
 
-# # Article List View Functions
-# @login_required(login_url='admin_login')
-# def dashboard(request):
-#     posts = Post.objects.all()
-#     return render(request, 'admin/dashboard.html', {'posts': posts})
+# Article List View Functions
+@login_required(login_url='admin_login')
+def dashboard(request):
+    posts = Post.objects.all()
+    return render(request, 'admin/dashboard.html', {'posts': posts})
 
-# # New article view function
-# @login_required(login_url='admin_login')
-# def new_post(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('dashboard')
-#     else:
-#         form = PostForm()
-#     return render(request, 'admin/new_post.html', {'form': form})
+# New article view function
+@login_required(login_url='admin_login')
+def new_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = PostForm()
+    return render(request, 'admin/new_post.html', {'form': form})
 
 @login_required
 def delete_blog(request, blogs_id):
