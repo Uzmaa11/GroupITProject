@@ -26,6 +26,7 @@ class Blogs(models.Model):
     comments_count = models.IntegerField(default=0)
     favorites_count = models.IntegerField(default=0)
     time = models.DateTimeField(auto_now_add=True)
+    rating = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.Blog_id)
