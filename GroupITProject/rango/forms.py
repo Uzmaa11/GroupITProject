@@ -18,7 +18,3 @@ class PostForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
-class BlogForm(forms.ModelForm):
-    class Meta:
-        model = Blogs
-        fields = ['blog_headline','restaurant_name' ,'rating','location', 'review']
