@@ -111,3 +111,21 @@ class BlogCreateView(View):
 #     else:
 #         form = PostForm()
 #     return render(request, 'admin/new_post.html', {'form': form})
+
+@login_required
+def delete_blog(request, blogs_id):
+    blogs = get_object_or_404(Blogs, pk=blog_id)
+    if request.user == blogs.user_id:
+        blogs.delete()
+        return redirect('blog_list')
+    else:
+        raise Http404
+ 
+def blog_search(request):
+    query = request.GET.get('q')
+    order_by = request.GET.get('order_by', '-rating')  # 默认按降序排列
+    if order_by == 'rating':
+        results = Blogs.objects.filter(title__icontains=query).order_by('rating')
+    else:
+        results = Blogs.objects.filter(title__icontains=query).order_by('-rating')
+    return render(request, 'blog_search.html', {'results': results, 'order_by': order_by})
