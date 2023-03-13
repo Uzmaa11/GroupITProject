@@ -1,0 +1,74 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Admin
+{% endblock %}
+
+{% block body_block %}
+    <br><div class="admin">
+        <h2 class="adminheader">Admin Access</h2>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <div style="display:flex">
+                    <div>
+                        <img class="blogimg" src="{% static 'images/2.jpg' %}">
+                    </div>
+                    <div>
+                        <h1>"Amazing Experience, Loved it!!!!"</h1>
+                        <h3>Din Tai Fung</h3>
+                        <p class="blogcontent"><b>Location: Glasgow, Scotland</b><br><br><b>Rating:
+                                9.0</b><br><br>Absolutely
+                            amazing
+                            place to eat, we will be making a reservation for our next visit! 10 of 10 for every single
+                            aspect of this
+                            meal, and this is coming from people who know and love great food!Everything about this
+                            restaurant was
+                            great. The place was clean and smelled good. The staff and greeter was very nice. Our waiter
+                            was awesome,
+                            the staff also worked as a team in bringing and cleaning up our food. The food was fresh and
+                            awesome. Then
+                            we also had dessert and that was really good as well. Great atmosphere with really nice
+                            people.</p>
+                        <button class="delete">
+                            Delete blog
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <div style="display:flex">
+                    <div>
+                        <img class="blogimg" src="{% static 'images/3.jpg' %}">
+                    </div>
+                    <div>
+                        <h1>"Delicious Food... Worth It!"</h1>
+                        <h3>TGI Fridays</h3>
+                        <p class="blogcontent"><b>Location: Stirling, Scotland</b><br><br><b>Rating:
+                                9.0</b><br><br>Absolutely
+                            amazing
+                            place to eat, we will be making a reservation for our next visit! 10 of 10 for every single
+                            aspect of this
+                            meal, and this is coming from people who know and love great food!Everything about this
+                            restaurant was
+                            great. The place was clean and smelled good. The staff and greeter was very nice. Our waiter
+                            was awesome,
+                            the staff also worked as a team in bringing and cleaning up our food. The food was fresh and
+                            awesome. Then
+                            we also had dessert and that was really good as well. Great atmosphere with really nice
+                            people.</p>
+                        <button class="delete">
+                            Delete blog
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endblock %}

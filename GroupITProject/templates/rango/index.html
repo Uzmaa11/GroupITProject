@@ -1,0 +1,61 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Home
+{% endblock %}
+
+{% block body_block %}
+<img class="responsivee" style="width: 100%;height:50%;" src="{% static 'images/10.jpg' %}">
+<div class="homeheader">
+  <h2>Welcome to Delicious!</h2>
+</div>
+<div style="width:100%;background-color: #ffffff;">
+  <h4>Most liked Blog!</h4>
+  <div class="row">
+    <div class="column">
+      <div class="card">
+        <div style="display:flex">
+          <div>
+            <img class="blogimg" src="{% static 'images/2.jpg' %}">
+          </div>
+          <div>
+            <h1>"Amazing Experience, Loved it!!!!"</h1>
+            <h3>Din Tai Fung</h3>
+            <p class="blogcontent"><b>Location: Glasgow, Scotland</b><br><br><b>Rating: 9.0</b><br><br>Absolutely
+              amazing
+              place to eat, we will be making a reservation for our next visit! 10 of 10 for every single aspect of this
+              meal, and this is coming from people who know and love great food!Everything about this restaurant was
+              great. The place was clean and smelled good. The staff and greeter was very nice. Our waiter was awesome,
+              the staff also worked as a team in bringing and cleaning up our food. The food was fresh and awesome. Then
+              we also had dessert and that was really good as well. Great atmosphere with really nice people.</p>
+          </div>
+        </div>
+        <hr class="commentline">
+        <div class="comment-section">
+          <div style="display: flex;margin-left:10%;">
+            <div style="margin-left:-30%;margin-right: 20%;">
+              <strong id="like_count">40</strong> likes
+              <button style="background-color:#ce1212;" id="like_btn" data-categoryid="{{ category.id }}"
+                class="btn btn-primary btn-sm" type="button">
+                <span data-feather="thumbs-up"></span>
+                Like
+              </button>
+            </div>
+            <div class="usercomment">
+              <div>
+                <img src="{% static 'images/3.jpg' %}" alt="avatar" width="40" height="40" />
+              </div>
+              <div class="comments">
+                <textarea class="form-control" id="textAreaExample" rows="4">Write a comment..</textarea>
+              </div>
+              <div class="commentbtn">
+                <button type="button">Post</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
