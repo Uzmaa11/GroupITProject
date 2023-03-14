@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blogs
-        fields = ['blog_headline','restaurant_name' ,'rating','location','author', 'review']
+        fields = ['blog_headline','restaurant_name' ,'rating','location','user_id', 'review']
 
 from django import forms
 from .models import Post
