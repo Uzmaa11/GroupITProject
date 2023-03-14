@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-
+from django.views.generic import View
 def index(request):
     
     return render(request, 'rango/index.html')
