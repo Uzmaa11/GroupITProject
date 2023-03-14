@@ -1,17 +1,71 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Blogs
+from django.contrib import messages
+from rango.forms import UserForm
+from django.contrib.auth.models import User, auth
+from django.contrib.auth import authenticate, login,logout
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+
 def index(request):
     
     return render(request, 'rango/index.html')
 
-def login(request):
+def user_login(request):
+    if request.method == 'POST':
+        print(request.POST)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print(username)
+        user = authenticate(username=username, password=password)
+        print(user)
+        if user:
+            if user.is_active:
+                auth_login(request, user)
+                return redirect(reverse('rango:index'))
+            else:
+                messages.info(request, 'Your account is disabled.')
+                return render(request, 'rango/login.html')
+        else:
+            messages.info(request, 'Invalid login details supplied.')
+            return render(request, 'rango/login.html')
+    else: 
+        return render(request, 'rango/login.html')
 
-    return render(request, 'rango/login.html')
 
 def register(request):
+    registered = False
+    print("1S")
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        if user_form.is_valid():
+            user = user_form.save(commit=False)
+            user.username = user.username.lower()
+            user.set_password(user.password)
+            user.save()
+            login(request, user)
+            registered = True
+            return redirect('index')
+                
+        else:
+            print(user_form.errors)
+            messages.error(request, 'An error occurred during registration')
+    else:
+        user_form = UserForm()
+        print("user_form = UserForm()")
+        
 
-    return render(request, 'rango/register.html')
+    return render(request,
+            'rango/register.html',
+            {'user_form': user_form, 'registered': registered} )
+            # {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('rango:index'))
 
 def upload(request):
 

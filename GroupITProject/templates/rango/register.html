@@ -11,11 +11,25 @@ Register
     background-image: url('{% static "images/bg.jpg" %}');
   }
 </style>
+<!-- {% if registered %} 
+<div style="margin-top:20%;" class="container">
+  <h1 style="color:white;font-size:40px;margin-left:10%;">thank you for registering!</h1>
+    <div style="margin-left:10%;margin-bottom:12%;" >
+      <a href="{% url 'rango:index' %}"> 
+        <h1 style="color:white;font-size:20px;"> Return to the homepage.</h1>
+      </a><br/> 
+    </div>
+</div>
 
-<form style="margin-top:10%;margin-bottom:10%;" action="/action_page.php" method="post">
+{% else %} -->
 
+<form style="margin-top:10%;margin-bottom:10%;" action="{% url 'rango:register' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
   <div class="container">
     <h2 class="registerheader">REGISTER</h2>
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+    
     <label for="fname"><b>First Name</b></label>
     <input type="text" placeholder="Enter First Name" name="fname" required>
 
@@ -25,14 +39,19 @@ Register
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
 
-    <label for="psw"><b>Confirm Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
+    <label for="password2"><b>Confirm Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password2" required>
+    {% if messages %}
+      {% for message in messages %}
+        <span style="color:rgb(144, 8, 8);font-size:10px;margin-left:1%;">{{message}}</span>
+      {% endfor %}
+    {% endif %}
     <button type="submit">Register</button>
 
   </div>
 </form><br>
+<!-- {% endif %} -->
 {% endblock %}

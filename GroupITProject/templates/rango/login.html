@@ -12,16 +12,23 @@ Login
   }
 </style>
 
-<form style="margin-top:10%;margin-bottom:10%;" action="/action_page.php" method="post">
 
+<form style="margin-top:10%;margin-bottom:10%;" action="{% url 'rango:user_login' %}" method="post">
+  {% csrf_token %}
+  
+  
   <div class="container">
     <h2 class="loginheader">LOGIN</h2>
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+    {% if messages %}
+      {% for message in messages %}
+        <span style="color:rgb(144, 8, 8);font-size:10px;margin-left:1%;">{{message}}</span>
+      {% endfor %}
+    {% endif %}
     <button type="submit">Login</button> 
   </div>
 </form><br>
