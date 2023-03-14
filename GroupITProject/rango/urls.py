@@ -9,6 +9,7 @@ urlpatterns = [
 path('', views.index, name='index'),
 # path('about/', views.about, name='about'),
 path('login/', views.user_login, name='user_login'),
+path('logout/', views.user_logout, name='user_logout'),
 path('register/', views.register, name='register'),
 path('upload/', views.BlogCreateView.as_view(), name='upload'),
 path('blogs/', views.blog_list, name='blogs'),
