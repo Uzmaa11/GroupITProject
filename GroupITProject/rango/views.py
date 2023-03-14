@@ -15,12 +15,9 @@ def index(request):
 
 def user_login(request):
     if request.method == 'POST':
-        print(request.POST)
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(username)
         user = authenticate(username=username, password=password)
-        print(user)
         if user:
             if user.is_active:
                 auth_login(request, user)
@@ -36,8 +33,6 @@ def user_login(request):
 
 
 def register(request):
-    registered = False
-    print("1S")
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         if user_form.is_valid():
@@ -46,26 +41,22 @@ def register(request):
             user.set_password(user.password)
             user.save()
             login(request, user)
-            registered = True
             return redirect('index')
                 
         else:
-            print(user_form.errors)
             messages.error(request, 'An error occurred during registration')
     else:
         user_form = UserForm()
-        print("user_form = UserForm()")
-        
 
     return render(request,
             'rango/register.html',
-            {'user_form': user_form, 'registered': registered} )
-            # {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
-
+            {'user_form': user_form} )
+            
 @login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('rango:index'))
+
 
 def upload(request):
 
