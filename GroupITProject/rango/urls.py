@@ -16,7 +16,7 @@ path('blogs/', views.blog_list, name='blogs'),
 path('UserProfile/', views.UserProfile, name='UserProfile'),
 path('admin/',views.admin, name='admin'),
 ]
-
+'''
 urlpatterns = [
     path('login/', admin_login, name='admin_login'),
     path('dashboard/', dashboard, name='dashboard'),
@@ -30,3 +30,4 @@ urlpatterns = [
 urlpatterns = [
     path('blog/search/', views.blog_search, name='blog_search'),
 ]
+'''
