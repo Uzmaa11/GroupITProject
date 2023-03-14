@@ -21,6 +21,6 @@ from django.urls import include
 urlpatterns = [
     path('', views.index, name='index'),
     path('rango/', include('rango.urls')),
-
+    path('test/', views.index, name='index'),  # 添加一个临时 URL 模式
     path('admin/', admin.site.urls),
 ]

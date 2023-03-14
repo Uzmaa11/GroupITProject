@@ -2,14 +2,14 @@ from django import forms
 from .models import Blogs
 from django.contrib.auth.models import User 
 
-
+from django import forms
+from .models import Post
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blogs
         fields = ['blog_headline','restaurant_name' ,'rating','location','user_id', 'review']
 
-from django import forms
-from .models import Post
+
 
 class PostForm(forms.ModelForm):
     class Meta:
