@@ -12,17 +12,18 @@ Upload
 
     }
 </style>
-
-<form class="uploadform" action="/action_page.php" method="post">
+{% block content %}
+<form class="uploadform"  method="POST" action="{% url 'rango:upload' %}">
+        {% csrf_token %}
     <div class="uploadcontainer">
         <h2 style="color:black;font-size:20px;margin-left:35%;">Upload Your Blog</h2>
-        <input type="text" placeholder="Enter Headline" name="headline" required>
+        <input type="text" placeholder="Enter Headline" name="blog_headline" required>
         <div style="display: flex;">
-            <input type="text" placeholder="Enter Restaurant Name" name="rname" required>
+            <input type="text" placeholder="Enter Restaurant Name" name="restaurant_name" required>
             <input type="text" placeholder="Enter Rating" name="rating" required>
         </div>
         <input type="text" placeholder="Enter location" name="location" required>
-        <textarea style="width:100%;"> Enter Description</textarea>
+        <textarea style="width:100%;" name="review"> Enter Description</textarea>
         <div class="uploadimg">
             <label for="img">Select image:</label>
             <input type="file" id="img" name="img" accept="image/*">
@@ -30,4 +31,10 @@ Upload
         <button style="color: white;" type="submit">Upload</button>
     </div>
 </form><br>
+{% endblock %}
+
+
+
+
+
 {% endblock %}

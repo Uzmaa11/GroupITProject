@@ -10,6 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.generic import View
 from .forms import BlogForm
+#from django.contrib.auth.models import User
+from .models import User
+
 def index(request):
     
     return render(request, 'rango/index.html')
@@ -86,7 +89,7 @@ def blog_list(request):#show the blogs
     return render(request, 'rango/blogs.html', {'blogs': blogs})
 
 
-
+@login_required
 class BlogCreateView(View):
     def get(self, request):
         form = BlogForm()
@@ -101,12 +104,42 @@ class BlogCreateView(View):
             #blog.user_id = user.id
             #finish login code:
             blog = form.save(commit=False)
+            #user = User.objects.get(id=request.user.id)
+            blog = Blogs(title=title, content=content, user_id=user)
             blog.user_id = request.user
             #default_user, created = User.objects.get_or_create(username='default_user') fake user code
             #blog.user = default_user
             #blog.save()
             return redirect('../blogs')
         return render(request, 'rango/upload.html', {'form': form})
+@login_required
+def submit_blog(request):
+    user_instance = request.user
+    if request.method == 'POST':
+        #form = BlogForm(request.POST, request.FILES)
+        user_instance = request.user
+        blog_headline = request.POST['blog_headline']
+        restaurant_name = request.POST['restaurant_name']
+        rating = request.POST['rating']
+        location = request.POST['location']
+        #user_id = user_instance.id
+        review = request.POST['review']
+
+        blog = Blogs(blog_headline=blog_headline, restaurant_name=restaurant_name, rating=rating,location=location,review=review,user_id=user_instance)
+
+        blog.save()
+        return redirect('../blogs')
+    return render(request, 'rango/upload.html')
+
+
+ #fields = ['blog_headline','restaurant_name' ,'rating','location','user_id', 'review']
+
+
+
+
+
+
+
 
 #@login_required
 #class BlogCreateView(request): #create the blogs
