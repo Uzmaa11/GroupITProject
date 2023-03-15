@@ -12,7 +12,8 @@ from django.views.generic import View
 from .forms import BlogForm
 #from django.contrib.auth.models import User
 from .models import User
-
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 def index(request):
     
     return render(request, 'rango/index.html')
@@ -24,6 +25,7 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
+
                 auth_login(request, user)
                 return redirect(reverse('rango:index'))
             else:
@@ -117,7 +119,10 @@ def submit_blog(request):
     user_instance = request.user
     if request.method == 'POST':
         #form = BlogForm(request.POST, request.FILES)
-        user_instance = request.user
+        #user_instance = get_user_model().objects.get(id=request.user.id)
+        #user_instance = request.user
+        #user_instance = User.objects.get(email=request.user.email)
+        user_id = request.session.get('user_id')
         blog_headline = request.POST['blog_headline']
         restaurant_name = request.POST['restaurant_name']
         rating = request.POST['rating']
@@ -125,7 +130,7 @@ def submit_blog(request):
         #user_id = user_instance.id
         review = request.POST['review']
 
-        blog = Blogs(blog_headline=blog_headline, restaurant_name=restaurant_name, rating=rating,location=location,review=review,user_id=user_instance)
+        blog = Blogs(blog_headline=blog_headline, restaurant_name=restaurant_name, rating=rating,location=location,review=review,user_id=user_id)
 
         blog.save()
         return redirect('../blogs')
